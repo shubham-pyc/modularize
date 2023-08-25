@@ -1,0 +1,57 @@
+# Compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+*.env
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# User-specific files
+.vscode/
+.idea/
+*.pyc
+*.pyo
+*.pyd
+*.DS_Store
+
+# Dependency directories
+lib/
+libs/
+dist/
+build/
+bin/
+eggs/
+
+# System-specific files
+*.swp
+Thumbs.db
+
+# Environment configuration
+.env
+
+# Editor-specific files
+*.vscode/
+*.sublime-project
+*.sublime-workspace
+*.idea/
+
+# Compiled C extensions
+*.so
+
+# Database files
+*.sqlite3
+*.db
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+
+.vscode/launch.json
+.vscode/settings.json
