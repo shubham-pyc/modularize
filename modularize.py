@@ -99,12 +99,11 @@ def make_init(module_name):
 
 # Main function that orchestrates the process of creating the module.
 def main():
-    # parser = argparse.ArgumentParser(description="Create a modular Python module based on functions, classes, and constants.")
-    # parser.add_argument("input_file", help="Path to the source Python file to be modularized.")
-    # args = parser.parse_args()
+    parser = argparse.ArgumentParser(description="Create a modular Python module based on functions, classes, and constants.")
+    parser.add_argument("input_file", help="Path to the source Python file to be modularized.")
+    args = parser.parse_args()
 
-    # file_path = args.input_file
-    file_path = "validate.py"
+    file_path = args.input_file
     module_name = file_path[:-3]  # Remove the .py extension
 
 
