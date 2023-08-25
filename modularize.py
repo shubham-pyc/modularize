@@ -88,7 +88,7 @@ def extract_imports(node):
     visitor.visit(tree)
 
 # This function creates import statements for the entire module.
-@lru_cache
+@lru_cache(None)
 def make_global_import():
     retValue = ""
     for im in imports:
@@ -99,7 +99,7 @@ def make_global_import():
 functions = []
 classes = []
 constants = []
-imports = []
+imports = set()
 
 # Scan a file's AST and populate the lists with appropriate information.
 def scan_file(code):
@@ -117,11 +117,20 @@ def scan_file(code):
                 global_scope.add_constant(c.id)
         elif isinstance(node, ast.Import):
             for alias in node.names:
-                imports.append(alias.name)
+                value = None
+                if alias.asname is not None:
+                    value = f"{alias.name} as {alias.asname}"
+                else:
+                    value = alias.name
+                if value not in imports:
+                    imports.add(value)
+
         elif isinstance(node, ast.ImportFrom):
             module = node.module
             for alias in node.names:
-                imports.append(f"{module}.{alias.name}")
+                value = f"{module}.{alias.name}"
+                if value not in imports:
+                    imports.add(value)
 
 # Create Python files for functions, classes, and constants.
 def create_file(arr, module_name):
@@ -162,11 +171,11 @@ def main():
 
 
 
-    os.makedirs(module_name, exist_ok=True)
 
     with open(file_path, "r") as file:
         source_code = file.read()
 
+    os.makedirs(module_name, exist_ok=True)
     scan_file(source_code)
     create_file(functions, module_name)
     create_file(classes, module_name)
